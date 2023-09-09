@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ -z "$VAULT_URL" ]]; then
+if [[ -z "$VAULT_ADDR" ]]; then
     echo "VAULT_URL env var is not set, cannot unseal"
     exit 1
 fi
@@ -16,13 +16,14 @@ if [[ -z "$UNSEAL_KEY" ]]; then
     echo "Failed to read unseal key from unseal key file, cannot unseal"
     exit 1
 fi
+
 while true
 do
-    status = $(curl -s ${VAULT_URL}/v1/sys/seal-status | jq '.sealed')
+    status = $(curl -s ${VAULT_ADDR}/v1/sys/seal-status | jq '.sealed')
     if [true = "$status"]
     then
-        echo "Unsealing $VAULT_URL";
-        curl -s --requst PUT --data '{"key": "'"${UNSEAL_KEY}"'"}' ${vAULT_URL}/v1/sys/unseal
+        echo "Unsealing $VAULT_ADDR";
+        curl -s --requst PUT --data '{"key": "'"${UNSEAL_KEY}"'"}' ${VAULT_ADDR}/v1/sys/unseal
     fi
     sleep 30
 done
