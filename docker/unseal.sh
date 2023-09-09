@@ -10,7 +10,7 @@ if [[ -z "$UNSEAL_KEY_FILE" ]]; then
     exit 1
 fi
 
-UNSEAL_KEY="$(<"${!UNSEAL_KEY}")"
+UNSEAL_KEY=$(<$UNSEAL_KEY_FILE)
 
 if [[ -z "$UNSEAL_KEY" ]]; then
     echo "Failed to read unseal key from unseal key file, cannot unseal"
