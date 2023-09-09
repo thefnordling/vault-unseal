@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "$VAULT_ADDR" ]]; then
-    echo "VAULT_URL env var is not set, cannot unseal"
+    echo "VAULT_ADDR env var is not set, cannot unseal"
     exit 1
 fi
 
