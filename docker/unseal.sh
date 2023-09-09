@@ -19,11 +19,11 @@ fi
 
 while true
 do
-    status = $(curl -s ${VAULT_ADDR}/v1/sys/seal-status | jq '.sealed')
+    status=$(curl -s ${VAULT_ADDR}/v1/sys/seal-status | jq '.sealed')
     if [true = "$status"]
     then
         echo "Unsealing $VAULT_ADDR";
-        curl -s --requst PUT --data '{"key": "'"${UNSEAL_KEY}"'"}' ${VAULT_ADDR}/v1/sys/unseal
+        curl -s --request PUT --data '{"key": "'"${UNSEAL_KEY}"'"}' ${VAULT_ADDR}/v1/sys/unseal
     fi
     sleep 30
 done
